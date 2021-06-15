@@ -14,3 +14,34 @@ function headTailGenerate(){
       		tcount=$(($tcount+1))
 	fi
 }
+
+function flipCoin(){
+while [ 1 ]
+do
+	if [ $isTie -eq 1 ]
+	then
+		diff=$(($hcount - $tcount))
+		if [ $diff -eq 2 ] || [ $diff -eq -2 ]
+		then
+			estimateResult $hcount $tcount $diff
+		else
+			headTailGenerate
+			isTie=0
+		fi
+	elif [ $isTie -eq 0 ]
+	then
+		if [ $hcount -eq 21 -o $tcount -eq 21 ]
+		then
+			diff=$(($hcount - $tcount))
+			estimateResult $hcount $tcount $diff
+		else
+			headTailGenerate
+		fi
+	else
+		break
+	fi
+done
+}
+
+#flipCoin
+echo $res
